@@ -8,7 +8,7 @@ data "aws_iam_policy_document" "queue" {
     }
 
     actions   = ["sqs:SendMessage"]
-    resources = ["arn:aws:sqs:*:*:zaw-s3-event-notification-queue"]
+    resources = ["arn:aws:sqs:*:*:nasir-s3-event-notification-queue"]
 
     condition {
       test     = "ArnEquals"
@@ -19,12 +19,12 @@ data "aws_iam_policy_document" "queue" {
 }
 
 resource "aws_sqs_queue" "queue" {
-  name   = "zaw-s3-event-notification-queue"
+  name   = "nasir-s3-event-notification-queue"
   policy = data.aws_iam_policy_document.queue.json
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "zaw-s3-sqs-bucket"
+  bucket = "nasir-s3-sqs-bucket"
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
